@@ -87,6 +87,18 @@ Analysis of the packet capture revealed multiple indicators indicative of SSL st
     <td>corp-login.acme-corp.local</td>
     <td>Targeted domain</td>
   </tr>
+  <tr>
+    <td>Gratuitous ARP repliesl</td>
+    <td>Evidence of ARP spoofing</td>
+  </tr>
+  <tr>
+    <td>Low TTL DNS reponses</td>
+    <td>Possible DNS manipulation</td>
+  </tr> 
+  <tr>
+    <td>Plaintext HTTP credentials</td>
+    <td>Evidence of SSL stripping</td>
+  </tr>
 </table>
 
                                                                               
