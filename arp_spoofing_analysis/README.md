@@ -26,7 +26,7 @@ This write up will cover the ARP spooing portion of the investigation using pack
 
 ### ARP Traffic Review
 
-&nbsp;&nbsp;&nbsp; I began by filtering ARP traffic within the packet capture to ID abnormal ARP behvior.
+I began by filtering ARP traffic within the packet capture to ID abnormal ARP behvior.
 
 Wireshark filter used: arp
 
