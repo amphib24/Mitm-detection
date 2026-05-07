@@ -32,7 +32,7 @@ I began by filtering DNS traffic within the packet capture to ID traffic specifi
    - dns
 
 #### Analyst Observation:
-   - Over 1,500 packets were identified, rewuiring more targeted filtering for analysis.
+   - Over 1,500 packets were identified, requiring more targeted filtering for analysis.
 
  <img width="1860" height="855" alt="initial_dns_filter" src="https://github.com/user-attachments/assets/81eda2c7-bcd6-47a5-ac83-b419bd378a38" />
 
@@ -51,7 +51,7 @@ I began by filtering DNS traffic within the packet capture to ID traffic specifi
 #### Wireshark Filter Used: 
    - dns.flags.response == 1 && dns.qry.name == "corp-login.acme-corp.login", filters DNS responses for the target domain.
 #### Analyst Observation:
-   - Most responses showed TTL vlaues ranging between 300-600 seconds, which is consistent with normal DNS behavior.
+   - Most responses showed TTL values ranging between 300-600 seconds, which is consistent with normal DNS behavior.
 
 <img width="1858" height="797" alt="dns_filter_by_domain_and_response(step 3)" src="https://github.com/user-attachments/assets/83ac3d6d-683d-445c-be3e-cb927c2758e2" />
 
@@ -64,9 +64,9 @@ I began by filtering DNS traffic within the packet capture to ID traffic specifi
    - Two suspicious DNS responses were identified:
        - Packet 1124: has a Source IP of 192.168.10.55 with a TTL of 30 seconds
        - Packet 2239: has a Source IP of 192.168.10.55 with a TTL of 25 seconds
-   - These responses originated from an unexpected internal host rather than the legitimate DNS resolver of 8.8.8.8 and had significatly lower TTL values. The combination
-     of DNS responses from an unathorized source, abnormally low TTL values, and targeting of the corp-login.acme-corp.local domain, strongly suggests DNS spoofing activity within
-     the network, where DNS responses are being manipulated to redirect traffi to an attacker-controlled system.
+   - These responses originated from an unexpected internal host rather than the legitimate DNS resolver of 8.8.8.8 and had significantly lower TTL values. The combination
+     of DNS responses from an unauthorized source, abnormally low TTL values, and targeting of the corp-login.acme-corp.local domain, strongly suggests DNS spoofing activity within
+     the network, where DNS responses are being manipulated to redirect traffic to an attacker-controlled system.
 
 <img width="1858" height="852" alt="_malicious_ip_results" src="https://github.com/user-attachments/assets/f059002e-6d06-4705-958b-c321c7cf7470" />
 
@@ -76,11 +76,11 @@ I began by filtering DNS traffic within the packet capture to ID traffic specifi
 
 ## Conclusion
 
-Analysis of the DNS traffic revealed multiple IOA's consisten with DNS spoofing as part of a broader MITM attack.
+Analysis of the DNS traffic revealed multiple IOA's consistent with DNS spoofing as part of a broader MITM attack.
 
 #### Key Indicators
    - DNS responses originating from 192.168.10.55 instead of 8.8.8.8
-   - Suspicously low TTL values
+   - Suspiciously low TTL values
    - Consistent targeting of the internal login domain
 
 ## Remediation
