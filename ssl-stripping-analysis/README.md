@@ -73,6 +73,9 @@ Using the HTTP stream analysis feature in Wireshark, I reconstructed the full se
 #### Analyst Observation:
    - The HTTP stream revealed credentials being transferred in plaintext, which included the username "alice" and a password of "Secret123!". These findings confirm a successful interception of sensitive authentication data.
 
+<img width="1855" height="907" alt="username_password" src="https://github.com/user-attachments/assets/322d2700-6f33-4e48-aa46-bcf1c1e86bcb" />
+
+
 ## Conclusion
 
 &nbsp;&nbsp;&nbsp; Anlaysis of the packet capture revealed multiple indicators indicative of SSL stripping, including:
@@ -86,8 +89,8 @@ and lateral movement within the network.
 
 ## Remediation
 
-  - Enforce HTTPS with HSTS(HTTP Strict Transport Security)
-  - Disable legacy HTTP access where possible
-  - Monitor for protocol downgrades from HTTPS to HTTP
-  - Implement endpoint detection for unusual traffic redirection
-  - Segement network traffic to limit interception opportunities
+    1) Enforce HTTPS with HSTS(HTTP Strict Transport Security)
+    2) Disable legacy HTTP access where possible
+    3) Monitor for protocol downgrades from HTTPS to HTTP
+    4) Implement endpoint detection for unusual traffic redirection
+    5) Segement network traffic to limit interception opportunities
