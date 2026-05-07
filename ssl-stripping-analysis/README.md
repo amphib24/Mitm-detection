@@ -54,3 +54,40 @@ I believe the attacker is using the same host as was identified durning the DNS 
    - No TLS traffic was found between the endpoints, indicating that encrypted communication was likely prevented or downgraded.
 
 <img width="1861" height="856" alt="verify_no_tls_traffic" src="https://github.com/user-attachments/assets/0349f4da-352a-428f-b65d-ea9b94cf85d8" />
+
+## HTTP Traffic Analysis
+I next analyzed HTTP traffic between the client and the suspected malicious endpoint.
+
+#### Wireshark Filter Used 
+   - http && ip.src == 192.168.10.10 && ip.dst == 192.168.10.55
+
+#### Analyst Observation:
+   - I found two packets, one containing an HTTP GET request (packet: 2240) and the other containing an HTTP POST request (packet: 2241). Both are related to user authentication acitvity and indicates the traffic was transmitted
+     without encryption via HTTP, providing a strong indication of downgrade activity common with SSL stripping.
+
+<img width="1856" height="852" alt="verify_http_traffic" src="https://github.com/user-attachments/assets/704447ee-e7cb-4e74-8296-7adb5684cb2e" />
+
+## Credential Exposure
+Using the HTTP stream analysis feature in Wireshark, I reconstructed the full session.
+
+#### Analyst Observation:
+   - The HTTP stream revealed credentials being transferred in plaintext, which included the username "alice" and a password of "Secret123!". These findings confirm a successful interception of sensitive authentication data.
+
+## Conclusion
+
+&nbsp;&nbsp;&nbsp; Anlaysis of the packet capture revealed multiple indicators indicative of SSL stripping, including:
+   
+   - Expected HTTPS traffic downgraded to HTTP
+   - Absense of TLS communication between endpoints
+   - Presence of HTTP login requests
+   - Plain text Credentials
+This evidence strongly indicates SSL stripping as part of a broader MITM attack chain. By downgrading HTTPS traffic to HTTP, the attacker was able to intercept login credentials in plaintext, enabling potential unauthorized access
+and lateral movement within the network.
+
+## Remediation
+
+  - Enforce HTTPS with HSTS(HTTP Strict Transport Security)
+  - Disable legacy HTTP access where possible
+  - Monitor for protocol downgrades from HTTPS to HTTP
+  - Implement endpoint detection for unusual traffic redirection
+  - Segement network traffic to limit interception opportunities
