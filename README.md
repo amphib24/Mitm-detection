@@ -30,3 +30,22 @@ credential interception.
    - Target Domain : corp-login.acme-corp.local
    - Analysis Tool Used: Wireshark
    - Data source : network-traffic.pcap
+
+ # Attack Chain Overview
+
+ARP Spoofing -> Traffic Interception -> DNS Spoofing -> Victim Redirect -> SSL Stripping -> Credential Capture
+
+# Findings
+
+## ARP Spoofing 
+ Anlaysis of the packet capture revealed multiple indicators indicative of ARP spoofing, including:
+
+ - Gratuitous ARP replies
+ - Duplicate IP-to-MAC mappings
+ - Gateway impersonation attempts
+ - Duplicate address detection alerts These findings strongly suggest that an attacker manipulated ARP traffic in order to impersonate the gateway and intercept network traffic as part of a MITM attack.
+ - Suspicious MAC address 02:fe:fe:fe:55
+#### Technical Analysis 
+<a href = https://github.com/amphib24/MITM-detection/tree/main/arp-spoofing-analysis>Analysis</a>
+                                                                              
+ 
