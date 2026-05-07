@@ -28,9 +28,11 @@ This write up will cover the ARP spooing portion of the investigation using pack
 
 I began by filtering ARP traffic within the packet capture to ID abnormal ARP behvior.
 
-<u>Wireshark filter used:<u/> arp
+#### Wireshark filter used: 
+   - arp
 
-<u>Reuslts:U/> A total of 391 packets were identified out of 3281 total packets in the capture.
+#### Reuslts:
+   - A total of 391 packets were identified out of 3281 total packets in the capture.
 
 <img width="1858" height="915" alt="initial_arp_filter" src="https://github.com/user-attachments/assets/6c12061b-9b4e-4a13-bada-4c37e26714ee" />
 
