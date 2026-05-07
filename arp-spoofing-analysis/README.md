@@ -8,7 +8,7 @@ This technique is commonly used in Man-in-the-Middle (MITM) attacks to intercept
 ## Scenario 
  
 &nbsp;&nbsp;&nbsp; This investigation is based off the MITM Detection labs from TryHackMe's SOC 1 learning path. The challenge involves locating activity associated with a MITM attack inside a corporate LAN environment.
-The lab provided a gateway IP of 192.168.10.1 which is a router, a domain of corp-login.acme.local, as well as the packet capture (pcap) file.
+The lab provided a gateway IP of 192.168.10.1 which is a router, a domain of corp-login.acme-corp.local, as well as the packet capture (pcap) file.
 
 The investigation is focused on identifying evidence of:
   - ARP Spoofing
