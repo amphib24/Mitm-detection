@@ -47,5 +47,15 @@ ARP Spoofing -> Traffic Interception -> DNS Spoofing -> Victim Redirect -> SSL S
  - Suspicious MAC address 02:fe:fe:fe:55
 #### Technical Analysis 
 <a href = https://github.com/amphib24/MITM-detection/tree/main/arp-spoofing-analysis>Analysis</a>
+
+## DNS Spoofing
+Analysis of the DNS traffic revealed multiple IOA's consistent with DNS spoofing as part of a broader MITM attack, including:
+
+   - DNS responses originating from 192.168.10.55 instead of 8.8.8.8
+   - Suspiciously low TTL values
+   - Consistent targeting of the internal login domain
+#### Technical Analysis 
+<a href = https://github.com/amphib24/MITM-detection/tree/main/dns-spoofing-analysis>Analysis</a>
+
                                                                               
  
