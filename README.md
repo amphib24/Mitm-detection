@@ -68,5 +68,26 @@ Analysis of the packet capture revealed multiple indicators indicative of SSL st
 #### Technical Analysis 
 <a href = https://github.com/amphib24/MITM-detection/tree/main/ssl-stripping-analysis>Analysis</a>
 
+# Indicators of Compromise (IOC)
+
+<table>
+  <tr>
+    <th>Indicator</th>
+    <th>Decription</th>
+  </tr>
+  <tr>
+   <td>192.168.10.55</td>
+   <td> Suspected malicious host</td>
+  </tr>
+  <tr>
+    <td>02:fe:fe:fe:55:55/td>
+    <td>Spoofed MAC address</td>
+  </tr>
+  <tr>
+    <td>corp-login.acme-corp.local</td>
+    <td>Targeted domain</td>
+  </tr>
+</table>
+
                                                                               
  
