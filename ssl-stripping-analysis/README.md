@@ -19,7 +19,7 @@ This write up will cover the SSL stripping portion of the investigation using pa
 ## Potential Indicators of Attack (IOAs)
   - HTTPS requests downgraded to HTTP
   - Persistent redirects from HTTPS to HTTP
-  - Absence of TLS negotiation where excpected  
+  - Absence of TLS negotiation where expected  
   - Certificate errors
   - Plaintext credentials observed in HTTP traffic
 ## Traffic Analysis
@@ -29,18 +29,18 @@ I began by analyzing TLS handshake activity associated with the target domain co
    - tls.handshake.type == 1 && tls.handshake.extensions_server_name == "corp-login.acme-corp.local"
 
 #### Analyst Observation:
-   - Client hello packets confirmed inital attempts to establish TLS connections to the target domain using Server Name Indication (SNI), indicating expected HTTPS communication at the start of the session.
+   - Client hello packets confirmed initial attempts to establish TLS connections to the target domain using Server Name Indication (SNI), indicating expected HTTPS communication at the start of the session.
 
 <img width="1857" height="856" alt="verify_domain_and_its_use_of_tls" src="https://github.com/user-attachments/assets/ba227748-e382-4918-b45b-8b8af9fed516" />
 
 ## DNS Spoofing Correlation Check
-I believe the attacker is using the same host as was identified durning the DNS anlaysis (192.168.10.55). To correlate the SSL stripping activity with the earlie DNS activity I analyzed responses from the suspected host.
+I believe the attacker is using the same host as was identified during the DNS analysis (192.168.10.55). To correlate the SSL stripping activity with the earlier DNS activity I analyzed responses from the suspected host.
 
 #### Wireshark Filter Used:
    - dns.flags.response == 1 && ip.src == 192.168.10.55 && dns.qry.name == "corp-login.acme-corp.local"
 
 #### Analyst Observation:
-   - The evidence suggests that the IP 192.168.10.55 is invovled in the traffic interception with and endpoint located at 192.168.10.10.
+   - The evidence suggests that the IP 192.168.10.55 is involved in the traffic interception with and endpoint located at 192.168.10.10.
 
 <img width="1858" height="852" alt="verify_dns_ip" src="https://github.com/user-attachments/assets/3621172a-cf26-4fd6-b3eb-afd68653bce0" />
 
@@ -62,7 +62,7 @@ I next analyzed HTTP traffic between the client and the suspected malicious endp
    - http && ip.src == 192.168.10.10 && ip.dst == 192.168.10.55
 
 #### Analyst Observation:
-   - I found two packets, one containing an HTTP GET request (packet: 2240) and the other containing an HTTP POST request (packet: 2241). Both are related to user authentication acitvity and indicates the traffic was transmitted
+   - I found two packets, one containing an HTTP GET request (packet: 2240) and the other containing an HTTP POST request (packet: 2241). Both are related to user authentication activity indicating the traffic was transmitted
      without encryption via HTTP, providing a strong indication of downgrade activity common with SSL stripping.
 
 <img width="1856" height="852" alt="verify_http_traffic" src="https://github.com/user-attachments/assets/704447ee-e7cb-4e74-8296-7adb5684cb2e" />
@@ -71,17 +71,17 @@ I next analyzed HTTP traffic between the client and the suspected malicious endp
 Using the HTTP stream analysis feature in Wireshark, I reconstructed the full session.
 
 #### Analyst Observation:
-   - The HTTP stream revealed credentials being transferred in plaintext, which included the username "alice" and a password of "Secret123!". These findings confirm a successful interception of sensitive authentication data.
+   - The HTTP stream revealed credentials being transferred in plain text, which included the username "alice" and a password of "Secret123!". These findings confirm a successful interception of sensitive authentication data.
 
 <img width="1855" height="907" alt="username_password" src="https://github.com/user-attachments/assets/322d2700-6f33-4e48-aa46-bcf1c1e86bcb" />
 
 
 ## Conclusion
 
-&nbsp;&nbsp;&nbsp; Anlaysis of the packet capture revealed multiple indicators indicative of SSL stripping, including:
+&nbsp;&nbsp;&nbsp; Analysis of the packet capture revealed multiple indicators indicative of SSL stripping, including:
    
    - Expected HTTPS traffic downgraded to HTTP
-   - Absense of TLS communication between endpoints
+   - Absence of TLS communication between endpoints
    - Presence of HTTP login requests
    - Plain text Credentials
 This evidence strongly indicates SSL stripping as part of a broader MITM attack chain. By downgrading HTTPS traffic to HTTP, the attacker was able to intercept login credentials in plaintext, enabling potential unauthorized access
@@ -89,8 +89,8 @@ and lateral movement within the network.
 
 ## Remediation
 
-    1) Enforce HTTPS with HSTS(HTTP Strict Transport Security)
+    1) Enforce HTTPS with HSTS (HTTP Strict Transport Security)
     2) Disable legacy HTTP access where possible
     3) Monitor for protocol downgrades from HTTPS to HTTP
     4) Implement endpoint detection for unusual traffic redirection
-    5) Segement network traffic to limit interception opportunities
+    5) Segment network traffic to limit interception opportunities
