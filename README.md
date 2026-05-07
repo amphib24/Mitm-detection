@@ -57,5 +57,16 @@ Analysis of the DNS traffic revealed multiple IOA's consistent with DNS spoofing
 #### Technical Analysis 
 <a href = https://github.com/amphib24/MITM-detection/tree/main/dns-spoofing-analysis>Analysis</a>
 
+## SSL Stripping
+Analysis of the packet capture revealed multiple indicators indicative of SSL stripping, including:
+
+   - Expected HTTPS traffic downgraded to HTTP
+   - Absence of TLS communication between endpoints
+   - Presence of HTTP login requests
+   - Plain text Credentials This evidence strongly indicates SSL stripping as part of a broader MITM attack chain. By downgrading HTTPS traffic to HTTP, the attacker was able to intercept login credentials in plaintext, enabling potential unauthorized access and lateral movement within the network.
+
+#### Technical Analysis 
+<a href = https://github.com/amphib24/MITM-detection/tree/main/ssl-stripping-analysis>Analysis</a>
+
                                                                               
  
