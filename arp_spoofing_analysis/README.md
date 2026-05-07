@@ -1,4 +1,4 @@
-## Arp Spoofing Analysis - MITM Investigation
+## ARP Spoofing Analysis - MITM Investigation
 
 ## Introduction
 
