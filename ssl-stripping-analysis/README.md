@@ -40,6 +40,17 @@ I believe the attacker is using the same host as was identified durning the DNS 
    - dns.flags.response == 1 && ip.src == 192.168.10.55 && dns.qry.name == "corp-login.acme-corp.local"
 
 #### Analyst Observation:
-   - The evidence suggests that the IP 192.168.10.55 is invovled in the traffic interception.
+   - The evidence suggests that the IP 192.168.10.55 is invovled in the traffic interception with and endpoint located at 192.168.10.10.
 
 <img width="1858" height="852" alt="verify_dns_ip" src="https://github.com/user-attachments/assets/3621172a-cf26-4fd6-b3eb-afd68653bce0" />
+
+## TLS Traffic Verification
+ I then checked for TLS traffic between the affected hosts.
+
+#### Wireshark Filter Used:
+   - tls && ip.src == 192.168.10.10 && ip.dst == 192.1681.10.55
+
+#### Analyst Observation:
+   - No TLS traffic was found between the endpoints, indicating that encrypted communication was likely prevented or downgraded.
+
+<img width="1861" height="856" alt="verify_no_tls_traffic" src="https://github.com/user-attachments/assets/0349f4da-352a-428f-b65d-ea9b94cf85d8" />
