@@ -15,7 +15,7 @@
 # Executive Summary
 
 &nbsp;&nbsp;&nbsp; This investigation documents the analysis of a simulated MITM attack on Acme-Corps corporate LAN as part of TryHackMe's SOC 1 learning path. The investigation was conducted using Wireshark for packet analysis, which focused on identifying IOAs, validating malicious traffic patterns, and documenting the evidence found as it correlates to the attack chain.
-Packet capture analysis revealed a chain attack which involved:
+Packet capture analysis revealed an attack which involved:
   1) ARP Spoofing
   2) DNS Spoofing
   3) SSL Stripping
@@ -80,7 +80,7 @@ Analysis of the packet capture revealed multiple indicators indicative of SSL st
    <td> Suspected malicious host</td>
   </tr>
   <tr>
-    <td>02:fe:fe:fe:55:55/td>
+    <td>02:fe:fe:fe:55:55</td>
     <td>Spoofed MAC address</td>
   </tr>
   <tr>
